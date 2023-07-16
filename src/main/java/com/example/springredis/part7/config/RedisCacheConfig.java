@@ -11,6 +11,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class RedisCacheConfig {
@@ -25,9 +26,10 @@ public class RedisCacheConfig {
                         RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer())
                 );
 
-        HashMap<String, RedisCacheConfiguration> configMap = new HashMap<>();
-        configMap.put("userAgeCache", RedisCacheConfiguration.defaultCacheConfig())
-                .entryTtl(Duration.ofSeconds(5));
+        Map<String, RedisCacheConfiguration> configMap = new HashMap<>();
+        configMap.put("userAgeCahe", RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(5))
+        );
         //@Cacheable(cacheNames = "userAgeCahe", key = "#userId") 의 기본 케시 시간을 5초 지정
 
         return RedisCacheManager
